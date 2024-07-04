@@ -1,0 +1,2 @@
+class RestrictedAccessController < ApplicationController
+end

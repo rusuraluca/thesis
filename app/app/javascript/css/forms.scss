@@ -1,0 +1,12 @@
+.form-control {
+  color: $body-color;
+  background-color: $body-bg;
+  border-color: $body-color;
+}
+
+.form-control:focus {
+  color: $body-color;
+  background-color: $body-bg;
+  border-color: $primary;
+  transition: 0.2s;
+}

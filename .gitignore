@@ -1,0 +1,24 @@
+__pycache__/
+wandb/
+data/
+.idea
+.DS_Store
+aifr/models/multitask/results/80-20small/best-model-93-12.pth
+aifr/models/multitask_dal/results/80-20big/best-model-86-24.pth
+aifr/models/multitask_dal/results/80-20small/best-model-93-89.pth
+aifr/models/multitask/results/80-20small/model_epoch_10.pth
+aifr/models/multitask/results/80-20small/model_epoch_11.pth
+aifr/models/multitask_dal/results/80-20small/model7-1-93-73.pth
+aifr/models/singletask/results/80-20small/best-model-93-02.pth
+aifr/models/singletask/results/loo/model_epoch_25.pth
+aifr/models/multitask_dal/results/80-20small/model7-1-2.pth
+aifr/models/singletask/results/80-20big/best-model-85-65.pth
+aifr/models/multitask_dal/results/80-20big/best-model-86-00.pth
+aifr/models/multitask_dal/results/80-20small/model-7-1-best-73.pth
+aifr/models/singletask/results/80-20big/model3-1.pth
+aifr/models/singletask/results/80-20small/model3-1.pth is 107.81 MB
+aifr/models/multitask/results/80-20big/best-model-85-92.pth
+aifr/models/multitask_dal/results/loo/best-model-94-61.pth
+api/aifr/models/multitask/results/80-20small/best-model-93-89.pth
+app/log/development.log
+app/node_modules/

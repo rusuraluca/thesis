@@ -1,0 +1,32 @@
+.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
+  = render(partial: "pages/pages_navigation")
+  main.px-3
+    h1.text-center = t('login')
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = render("devise/shared/error_messages", resource: resource)
+
+      .form-group.row.mb-2
+        .col-sm-4.col-form-label
+          = f.label(:email)
+        .col-sm-8
+          = f.email_field(:email, autofocus: true, autocomplete: "email", class: "form-control")
+
+      .form-group.row.mb-2
+        .col-sm-4.col-form-label
+          = f.label(:password)
+        .col-sm-8
+          = f.password_field(:password, autocomplete: "current-password", class: "form-control")
+
+      - if devise_mapping.rememberable?
+        .form-group.row.mb-2
+          .col-sm-4.col-form-label
+            = f.label(:remember_me)
+          .col-sm-8
+            = f.check_box(:remember_me)
+
+      .actions.d-grid.gap-2
+        = f.submit("Log in", class: "btn btn-lg btn-primary fw-bold md-2")
+
+      = render("devise/shared/links")
+
+  = render(partial: "pages/pages_footer")

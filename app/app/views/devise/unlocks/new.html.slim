@@ -1,0 +1,20 @@
+.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
+  = render(partial: "pages/pages_navigation")
+  main.px-3
+    h1.text-center = "Resend unlock instructions"
+
+  = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+
+    .form-group.row.mb-2
+      .col-sm-4.col-form-label
+        = f.label :email
+      .col-sm-8
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+
+    .actions.d-grid.gap-2
+      = f.submit("Resend unlock instructions", class: "btn btn-lg btn-primary fw-bold md-2")
+
+    = render("devise/shared/links")
+
+  = render(partial: "pages/pages_footer")

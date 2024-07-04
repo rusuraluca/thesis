@@ -1,0 +1,42 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+  div.container.mt-3
+    .row.justify-content-center
+      .col-md-8
+        .btn-toolbar.mt-3
+          = link_to admin_profile_path(@profile), class: "btn btn-primary mr-2" do
+            i.fas.fa-arrow-left
+            |  Back
+        h1.text-left.mt-3 Send Inquiry
+        = simple_form_for([@profile, @inquire], html: { multipart: true, class: "form-horizontal" }) do |f|
+          = f.error_notification
+
+          - if @inquire.errors.any?
+            .alert.alert-danger
+              ul
+                - @inquire.errors.full_messages.each do |message|
+                  li = message
+
+          .form-group.row
+            = f.label :date_taken, class: 'col-sm-3 col-form-label'
+            .col-sm-9
+              = f.input :date_taken, as: :date, label: false, input_html: { class: 'form-control custom-select' }
+
+          .form-group.row
+            = f.label :city_taken, class: 'col-sm-3 col-form-label'
+            .col-sm-9
+              = f.input :city_taken, label: false, input_html: { class: 'form-control' }
+
+          .form-group.row
+            = f.label :country_taken, class: 'col-sm-3 col-form-label'
+            .col-sm-9
+              = f.input :country_taken, label: false, input_html: { class: 'form-control custom-select' }
+
+          .form-group.row
+            = f.label :images, class: 'col-sm-3 col-form-label'
+            .col-sm-9
+              = f.input :images, as: :file, label: false, input_html: { multiple: true, accept: 'image/*', class: 'form-control-file' }
+
+          .form-actions
+            = f.button :submit, "Send", class: 'btn btn-success'

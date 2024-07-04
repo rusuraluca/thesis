@@ -1,0 +1,13 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+  div.container.mt-3
+    .row.justify-content-center
+      .col-md-8
+        h2.text-left New Profile
+        == render 'form'
+
+        .btn-toolbar.mt-3
+          = link_to dashboard_path, class: "btn btn-primary mr-2" do
+            i.fas.fa-arrow-left
+            |  Back

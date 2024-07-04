@@ -1,0 +1,20 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+  div.container.mt-3
+    .btn-toolbar.mt-3
+      = link_to profile_inquire_path(@inquire), class: "btn btn-primary mr-2" do
+        i.fas.fa-arrow-left
+        |  Back
+  div.container.mt-3
+    h2.text-left Edit Inquiry
+    = simple_form_for([@inquire.profile, @inquire], html: { multipart: true, class: "form-horizontal" }) do |f|
+      = f.error_notification
+
+      - if user_is_admin?
+        .form-group.row
+          = f.label :status, class: 'col-sm-3 col-form-label'
+          .col-sm-9
+            = f.select :status, Inquire.statuses.keys.map { |status| [status.humanize, status] }, {}, { class: 'form-control custom-select' }
+      .form-actions.mt-4
+        = f.button :submit, 'Update Status', class: 'btn btn-secondary'

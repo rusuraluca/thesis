@@ -1,0 +1,49 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+  div.container.mt-3
+    .btn-toolbar.mt-3.p-1
+      = link_to profile_inquires_path(@inquire.profile), class: "btn btn-primary mr-2" do
+        i.fas.fa-arrow-left
+        |  Back
+    .row
+      .col-md-6
+        - if @inquire.images.attached?
+          .d-flex.flex-wrap
+            - @inquire.images.each do |image|
+              = image_tag(image.variant(resize_to_fill: [100, 100]), class: "img-fluid p-1", style: "flex: 1 0 50%")
+      .col-md-6
+        .card-body
+          h4.card-text.strong
+            strong Inquiry #
+            = @inquire.id
+          h4.card-text.mb-4
+            span.badge class=(@inquire.status == 'solved' ? 'bg-success text-white' : @inquire.status == 'not_verified' ? 'bg-warning text-white' : 'bg-danger text-white') = @inquire.status.humanize
+          p.card-text
+            strong.mr-2 Date Taken:
+            = @inquire.date_taken
+          p.card-text
+            strong.mr-2 City Taken:
+            = @inquire.city_taken
+          p.card-text
+            strong.mr-2 Country Taken:
+            = @inquire.country_taken
+          p.card-text
+            strong.mr-2 Submitted by:
+            = @inquire.user.email
+
+          h4.card-text.strong
+            strong.mr-2 Similarity Score:
+            span.badge class=(@inquire.similarity >= 0.50 ? 'bg-success text-white' : @inquire.similarity > 0.25 ? 'bg-warning text-white' : 'bg-danger text-white') = sprintf('%.2f%%', @inquire.similarity * 100)
+
+          .btn-toolbar.mt-3
+            = link_to admin_profile_path(@inquire.profile), class: "btn btn-light mt-2" do
+              i.fas.fa-user
+              |  Profile
+          .btn-toolbar.mt-3
+            = link_to edit_profile_inquire_path(@inquire.profile, @inquire), class: "btn btn-secondary mr-2 mt-2" do
+              i.fas.fa-edit
+              |  Update Status
+              = link_to profile_inquire_path(@inquire.profile, @inquire), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mt-2" do
+                i.fas.fa-trash-alt
+                |  Delete

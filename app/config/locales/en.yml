@@ -1,0 +1,8 @@
+en:
+  app_name: "MPAIFR"
+  app_description: "Missing Persons Age-Invariant Face Recognition"
+  login: "Log in"
+  register: "Register"
+  home: "Home"
+  dashboard: "Dashboard"
+  github: "GitHub"

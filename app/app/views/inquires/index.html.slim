@@ -1,0 +1,49 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+  div.container.mt-3
+    .btn-toolbar.mt-3.p-1
+      = link_to admin_profile_path(@profile), class: "btn btn-primary mr-2" do
+        i.fas.fa-arrow-left
+        |  Back
+    h2.text-left.mt-3 All inquiries
+    div.table-responsive
+      table.table.table-hover.table-light.shadow.rounded
+        thead.thead-light
+          tr
+            th Date Taken
+            th City Taken
+            th Country Taken
+            th Profile
+            th Submitted by
+            th Status
+            th Actions
+        tbody
+          - @inquires.each do |inquire|
+            tr.text-dark
+              td = inquire.date_taken
+              td = inquire.city_taken
+              td = inquire.country_taken
+              td = link_to inquire.profile.name, admin_profile_path(inquire.profile)
+              td = inquire.user.email
+              td
+                - case inquire.status
+                  - when 'not_verified'
+                    span.badge.bg-warning.text-white = 'Not Verified'
+                  - when 'solved'
+                    span.badge.bg-success.text-white = 'Solved'
+                  - when 'not_solved'
+                    span.badge.bg-danger.text-white = 'Not Solved'
+              td
+                = link_to [inquire.profile, inquire], class: 'btn btn-primary btn-sm mr-2' do
+                  i.fas.fa-eye
+                  |  Show
+                = link_to edit_profile_inquire_path(inquire.profile, inquire), class: 'btn btn-secondary btn-sm mr-2' do
+                  i.fas.fa-edit
+                  |  Update Status
+                = link_to profile_inquire_path(inquire.profile, inquire), method: :delete, data: { confirm: "Are you sure you want to delete this inquiry?" }, class: 'btn btn-danger btn-sm' do
+                  i.fas.fa-trash-alt
+                  |  Delete
+
+    div.d-flex.justify-content-center.mt-4
+      = paginate @inquires, theme: 'bootstrap-5'

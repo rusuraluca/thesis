@@ -1,0 +1,4 @@
+div.mt-5 aria-live="polite" aria-atomic="true" style="position: relative;"
+  div style="position: absolute; top: 20px; right: 20px;"
+    - flash.each do |(klass, message)|
+      = render(partial: "common/flash_message", locals: { klass: klass, message: message })

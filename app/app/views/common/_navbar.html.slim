@@ -1,0 +1,14 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-secondary.sticky-top
+  = link_to(t("app_name"), root_path, class: "navbar-brand")
+  button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+    span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.m-2
+        = link_to(t("dashboard"), dashboard_path)
+      - if user_is_admin?
+        li.nav-item.m-2
+          = link_to("User Management", admin_users_path)
+
+    .nav-item
+      = link_to("Logout", destroy_user_session_path, method: :delete)

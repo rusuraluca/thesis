@@ -1,0 +1,67 @@
+div.w-100
+  = render(partial: "common/navbar")
+
+
+  div.container.mt-3
+    h2.text-left Profiles Dashboard
+    - @profiles.each do |profile|
+      .card.mb-3.mt-3
+        .row.m-3
+          - if profile.images.attached?
+            .col-md-6
+              .d-flex.flex-wrap
+                - profile.images.limit(4).each do |image|
+                  = image_tag(image.variant(resize_to_fill: [100, 100]), class: "img-fluid p-1", style: "flex: 1 0 50%")
+          .col-md-6
+            .card-body.text-dark
+              h4.card-text.strong
+                strong Profile #
+                = profile.id
+              h4.card-text.mb-4
+                - if profile.found
+                  span.badge.bg-success.text-white = 'Found'
+                - else
+                  span.badge.bg-danger.text-white = 'Not Found'
+              - if user_is_admin?
+                p.card-text
+                  strong.mr-2 Name:
+                  = profile.name ? profile.name : 'Unknown'
+              p.card-text
+                strong.mr-2 Gender:
+                = profile.gender
+              p.card-text
+                strong.mr-2 Age:
+                = profile.age
+              p.card-text
+                strong.mr-2 Nationality:
+                = profile.nationality
+              - if user_is_admin?
+                p.card-text
+                  strong.mr-2 Date of Birth:
+                  = profile.date_of_birth.strftime("%d %b %Y") if profile.date_of_birth.present?
+                p.card-text
+                  strong.mr-2 Date of Disappearance:
+                  = profile.date_of_disappearance.strftime("%d %b %Y") if profile.date_of_disappearance.present?
+                p.card-text
+                  strong.mr-2 City of Disappearance:
+                  = profile.city_of_disappearance
+                p.card-text
+                  strong.mr-2 Country of Disappearance:
+                  = profile.country_of_disappearance
+              .btn-toolbar.mt-5
+                = link_to admin_profile_path(profile), class: "btn btn-primary mr-2 mt-2" do
+                  i.fas.fa-eye
+                  |  View
+                = link_to new_profile_inquire_path(profile), class: "btn btn-primary mr-2 mt-2" do
+                  i.fas.fa-file
+                  |  Send Inquiry
+                - if user_is_admin?
+                  = link_to profile_inquires_path(profile), class: "btn btn-primary mr-2 mt-2" do
+                    i.fas.fa-file
+                    |  View Inquiries
+
+    div.d-flex.justify-content-center.mt-4
+      = paginate @profiles, theme: 'bootstrap-5'
+    - if user_is_admin?
+      = link_to new_admin_profile_path, class: "btn btn-primary btn-floating position-fixed", style: "bottom: 20px; right: 20px;" do
+        i.fas.fa-plus

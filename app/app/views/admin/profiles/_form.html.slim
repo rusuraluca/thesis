@@ -1,0 +1,57 @@
+= simple_form_for [:admin, @profile], html: { multipart: true, class: "form-horizontal" } do |f|
+  = f.error_notification
+
+  - if @profile.errors.any?
+    .alert.alert-danger
+      ul
+        - @profile.errors.full_messages.each do |message|
+          li = message
+
+  .form-group.row
+    = f.label :name, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :name, label: false, input_html: { class: 'form-control' }
+
+  .form-group.row
+    = f.label :date_of_birth, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :date_of_birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year, order: [:day, :month, :year], label: false, input_html: { class: 'form-control custom-select' }
+
+  .form-group.row
+    = f.label :gender, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :gender, collection: ['Male', 'Female', 'Other'], label: false, input_html: { class: 'form-control custom-select' }
+
+  .form-group.row
+    = f.label :nationality, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :nationality, label: false, input_html: { class: 'form-control' }
+
+  .form-group.row
+    = f.label :date_of_disappearance, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :date_of_disappearance, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year, order: [:day, :month, :year], label: false, input_html: { class: 'form-control custom-select' }
+
+  .form-group.row
+    = f.label :city_of_disappearance, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :city_of_disappearance, as: :string, label: false, input_html: { class: 'form-control' }
+
+  .form-group.row
+    = f.label :country_of_disappearance, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :country_of_disappearance, as: :country, priority: ['Romania'], label: false, input_html: { class: 'form-control custom-select' }
+
+  .form-group.row
+    = f.label :found, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      .form-check
+        = f.input :found, as: :boolean, label: false, input_html: { class: 'form-check-input', style: 'transform: scale(1.5);' }
+
+  .form-group.row
+    = f.label :images, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.input :images, as: :file, label: false, input_html: { multiple: true, accept: 'image/*', class: 'form-control-file' }
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-secondary'

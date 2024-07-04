@@ -1,0 +1,12 @@
+.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column.text-center
+  = render(partial: "pages/pages_navigation")
+
+  main.px-3
+    h1 = t("app_name")
+    p.lead
+      = t("app_description")
+    .d-grid.gap-2
+      = link_to(t("login"), new_user_session_path, class: "btn btn-lg btn-primary fw-bold md-2 mr-3")
+      = link_to(t("register"), new_user_registration_path, class: "btn btn-lg btn-secondary fw-bold md-2")
+
+  = render(partial: "pages/pages_footer")
